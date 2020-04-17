@@ -32,7 +32,7 @@ function update_all(){
     image_list=( "hyperdata8.3_hd" "hyperdata8.3_tb" "hyperdata8.3_hl" "hyperdata8.3_eda" )
     for image in ${image_list[@]};do
         version=$(curl -X GET ${pull_registry}/v2/${image}/tags/list | jq -r '.tags | .[-1]')
-        echo "[PULL IMAGE VERSION] $version" | grep "[PULL IMAGE VERSION]" --color
+        echo "[PULL IMAGE] $image:$version" | grep "[PULL IMAGE]" --color
         docker pull ${pull_registry}/${image}:${version}
         docker tag ${pull_registry}/${image}:${version} ${push_registry}/${image}:${version}
         docker push ${push_registry}/${image}:${version}
@@ -41,7 +41,7 @@ function update_all(){
 
 function update_once(){
     version=$(curl -X GET ${pull_registry}/v2/${name}/tags/list | jq -r '.tags | .[-1]')
-    echo "[PULL IMAGE VERSION] $version" | grep "[PULL IMAGE VERSION]" --color
+    echo "[PULL IMAGE] $name:$version" | grep "[PULL IMAGE]" --color
     docker pull ${pull_registry}/${name}:${version}
     docker tag ${pull_registry}/${name}:${version} ${push_registry}/${name}:${version}
     docker push ${push_registry}/${name}:${version}
