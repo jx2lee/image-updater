@@ -4,6 +4,16 @@ This repo is for Updating Docker image between two registries using shell script
 
 ## How to Use
 
+### Preperation
+
+Before running, set `registry.config`. `pull_registry` writes the registry address to get the image, `push_registry` writes the image registry address to update. For example:  
+```bash
+pull_registry=192.xxx.xxx.xxx
+push_registry=192.yyy.yyy.yyy
+```  
+
+### Usage
+
 run `updateImage.sh` script. `all` and `img` are the execution factors. `all` is used to start Updating all Image, next is used to continue learning. For example:  
 ```bash
 $ ./updateImage.sh
